@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserInfo">
+	<select id="queryUsers" parameterType="map" resultType="UserInfo">
+		select id,names from user_info
+	</select>
+
+	<select id="get" parameterType="map" resultType="UserInfo">
+		select id,names from user_info where id=#{arg0}
+	</select>
+	
+	
+	<insert id="insert" parameterType="map" keyProperty="id" useGeneratedKeys="true">
+		insert into user_info set names=#{names}
+	</insert>
+
+	<update id="update">
+	    update user_info
+	    <set>
+			<if test="null!=names and ''!=names">names = #{names },</if>
+		</set> 
+	     where id = #{id}
+	</update>
+</mapper>
